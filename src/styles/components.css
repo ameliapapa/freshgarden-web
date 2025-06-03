@@ -1,0 +1,39 @@
+.text-text-alternative {
+  color: white;
+}
+
+.text-text-primary {
+  color: #213547;
+}
+
+
+.border-border-primary {
+  border-color: #e5e7eb;
+}
+
+.text-10xl {
+  font-size: 9rem;
+  line-height: 1;
+}
+
+.container {
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 80rem;
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+
+@media (min-width: 640px) {
+  .container {
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .container {
+    padding-left: 2rem;
+    padding-right: 2rem;
+  }
+} 
