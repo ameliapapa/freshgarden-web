@@ -1,11 +1,11 @@
 "use client";
 
-import { Button, useMediaQuery } from "@relume_io/relume-ui";
-import type { ButtonProps } from "@relume_io/relume-ui";
+import { useMediaQuery } from "@relume_io/relume-ui";
 import { useScroll, useTransform, motion } from "framer-motion";
 import { useRef } from "react";
 import { BiSolidStar } from "react-icons/bi";
 import { RxChevronRight } from "react-icons/rx";
+import { buttonStyles, typography } from "../../styles/design-system";
 
 type Testimonial = {
   quote: string;
@@ -16,7 +16,12 @@ type Testimonial = {
 type Props = {
   heading: string;
   description: string;
-  buttons: ButtonProps[];
+  buttons: Array<{
+    title: string;
+    variant: 'primary' | 'secondary' | 'outline' | 'ghost' | 'link';
+    size?: 'sm' | 'default' | 'lg' | 'icon';
+    iconRight?: React.ReactNode;
+  }>;
   leftTestimonials: Testimonial[];
   rightTestimonials: Testimonial[];
 };
@@ -48,25 +53,25 @@ export const Testimonial33 = (props: Testimonial33Props) => {
     <section
       id="relume"
       ref={sectionRef}
-      className="overflow-hidden bg-[#1F2B11] px-[5%] py-12 md:py-16 lg:py-20"
+      className="overflow-hidden bg-[#3E5622] px-[5%] py-12 md:py-16 lg:py-20"
     >
       <div className="container grid min-h-svh auto-cols-fr grid-cols-1 overflow-hidden lg:h-[90vh] lg:min-h-[auto] lg:grid-cols-[0.75fr_1fr] lg:overflow-visible">
         <div className="flex flex-col justify-center p-8 md:p-12">
           <div>
-            <h2 className="rb-5 mb-5 text-6xl font-serif font-light text-white md:mb-6 md:text-9xl lg:text-10xl">
+            <h2 className={`rb-5 mb-5 ${typography.heading.sizes.h2} font-heading font-light text-white md:mb-6`}>
               {heading}
             </h2>
-            <p className="text-white/90 md:text-md">{description}</p>
+            <p className={`${typography.body.sizes.lg} text-white/90`}>{description}</p>
           </div>
           <div className="mt-6 flex flex-wrap items-center gap-4 md:mt-8">
             {buttons.map((button, index) => (
-              <Button 
-                key={index} 
-                {...button}
-                className={button.variant === 'secondary' ? 'bg-transparent text-white border-white hover:bg-white/10' : 'text-white'}
+              <button
+                key={index}
+                className={`${buttonStyles.base} ${buttonStyles.variants[button.variant]} ${buttonStyles.sizes[button.size || 'default']}`}
               >
-                {button.title}
-              </Button>
+                <span>{button.title}</span>
+                {button.iconRight && <span className="ml-2">{button.iconRight}</span>}
+              </button>
             ))}
           </div>
         </div>
@@ -102,7 +107,7 @@ export const Testimonial33 = (props: Testimonial33Props) => {
 };
 
 const TestimonialCard = (testimonial: Testimonial) => (
-  <div className="flex w-full flex-col items-start justify-between rounded-lg border border-white/10 bg-white/5 p-6 backdrop-blur-sm md:p-8">
+  <div className="flex w-full flex-col items-start justify-between rounded-lg border border-white/10 bg-[#172815] p-6 backdrop-blur-sm md:p-8">
     <div className="rb-5 mb-5 md:mb-6">
       <div className="rb-6 mb-6 flex">
         {Array(testimonial.numberOfStars)
@@ -111,10 +116,10 @@ const TestimonialCard = (testimonial: Testimonial) => (
             <BiSolidStar key={starIndex} className="mr-1 size-6 text-white" />
           ))}
       </div>
-      <blockquote className="font-mono text-lg text-white">{testimonial.quote}</blockquote>
+      <blockquote className={`${typography.body.sizes.lg} text-white`}>{testimonial.quote}</blockquote>
     </div>
     <div className="flex w-full flex-col items-start text-left">
-      <p className="font-medium text-white">{testimonial.name}</p>
+      <p className={`${typography.body.sizes.base} font-medium text-white`}>{testimonial.name}</p>
     </div>
   </div>
 );
@@ -124,7 +129,7 @@ export const Testimonial33Defaults: Props = {
   description: "",
   buttons: [
     { title: "Read", variant: "secondary" },
-    { title: "Reserve", variant: "link", size: "link", iconRight: <RxChevronRight /> },
+    { title: "Reserve", variant: "link", iconRight: <RxChevronRight /> },
   ],
   leftTestimonials: [
     {
