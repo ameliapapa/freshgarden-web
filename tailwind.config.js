@@ -22,7 +22,8 @@ export default {
         'card-light': '#F5F5F0',
       },
       fontFamily: {
-        'serif': ['Playfair Display', 'serif'],
+        'sans': ['fira-code', 'monospace'],
+        'heading': ['meno-banner', 'serif'],
       },
     },
   },
